@@ -27,3 +27,9 @@ export function getDetail(id) {
         console.log(err);
     });
 };
+
+export function getThemes() {
+    return axios.get('/api/themes').then(function (res) {
+        return res;
+    });
+}

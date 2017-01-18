@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import { getLatestStory } from '../helpers/api';
 import { connect } from 'react-redux';
 import * as Actions from '../actions';
 import moment from 'moment';
 import Header from '../components/Header';
+import ThemesDrawer from './ThemesDrawer';
 
 let currentDate = moment().subtract(1, 'days');
 
@@ -14,12 +14,13 @@ class StoryListContainer extends Component {
 
         this.state = {
             scrollTop: 0,
+            themesOpen: false,
         }
     }
 
     componentDidMount() {
         if (this.props.mainList.latest.length === 0) {
-            this.props.dispatch(Actions.GET_LATEST_DATA());
+            this.props.dispatch(Actions.GET_LATEST_DATA());          
         }
         window.addEventListener('scroll', this.handleScroll);
         document.body.scrollTop = this.props.display.mainScrollTop;
@@ -42,6 +43,12 @@ class StoryListContainer extends Component {
         }
     }
 
+    toggleThemes = () => {
+        this.setState({
+            themesOpen: !this.state.themesOpen
+        });
+    }
+
     render() {
         return (
             <div>
@@ -51,12 +58,14 @@ class StoryListContainer extends Component {
                         top: 0,
                         width: '100%',
                         height: '20px',
-                        padding: '10px 20px',
+                        padding: '10px 0px',
                         background: '#eee',
                         textAlign: 'center'
                     }}>
+                    <span style={{float: 'left'}} onClick={this.toggleThemes}>{'O_O'}</span>
                     <span>{'首页'}</span>
                 </div>
+                <ThemesDrawer show={this.state.themesOpen} />
                 <div id="story-list-container">
                     {
                         this.props.mainList.latest.map((item, index) => {

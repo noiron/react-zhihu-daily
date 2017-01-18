@@ -13,20 +13,24 @@ const getListAPI = (req, res) => {
     });
 }
 
-// 获取过往的文章列表
+/** 
+ * 获取过往的文章列表 
+ */
 function getBeforeStory(date) {
-    return axios.get('http://news.at.zhihu.com/api/4/news/before/' + date).then(function(data) {
+    return axios.get('http://news.at.zhihu.com/api/4/news/before/' + date).then(function (data) {
         return data;
     });
 }
 
 const getBeforeStoryAPI = (req, res) => {
-    getBeforeStory(req.query.date).then(function(data) {
+    getBeforeStory(req.query.date).then(function (data) {
         res.send(data.data);
     });
 }
 
-// 获取文章内容
+/** 
+ * 获取文章内容
+ */
 function getDetail(id) {
     return axios.get('http://news-at.zhihu.com/api/4/news/' + id).then(function (res) {
         return res;
@@ -43,8 +47,24 @@ const getDetailAPI = (req, res) => {
     })
 }
 
+/**
+ * 获取日报的主题
+ */
+function getThemes() {
+    return axios.get('http://news-at.zhihu.com/api/4/themes').then(function (res) {
+        return res;
+    }).catch((err) => { console.log(err); })
+}
+
+const getThemesAPI = (req, res) => {
+    getThemes().then(data => {
+        res.send(data.data);
+    });
+}
+
 module.exports = {
     getListAPI,
     getDetailAPI,
     getBeforeStoryAPI,
+    getThemesAPI,
 }

@@ -3,6 +3,11 @@ body {
     font-family: 'Helvetica Neue', Helvetica, Arial, 'Microsoft YaHei', Sans-serif;
 }
 
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
 #app {
     background: #f1f1f1;
 }
@@ -100,4 +105,22 @@ body {
         text-align: right;
         margin-bottom: 30px;
     }
+}
+
+#themes-wrap {
+    transition: left 0.5s, opacity 0.5s;
+    opacity: 0;
+    width: 50%;
+    left: -50%;
+    position: fixed;
+    // visibility: hidden;
+    li {
+        margin: 20px 0 0 0;
+    }
+}
+
+#themes-wrap.show {
+    left: 0;
+    opacity: 1;
+    // visibility: visible;
 }

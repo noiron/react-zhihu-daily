@@ -1,16 +1,17 @@
 var path = require('path');
 var webpack = require('webpack');
-
-var plugins = [];
-
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     debug: true,
     devtool: "cheap-eval-source-map",
-    entry: './app/index.js',
+    entry: {
+        app: path.join(__dirname, './app/index.js'),
+        vendor: ['react', 'react-dom', 'react-router'],
+    },
     output: {
         path: path.join(__dirname, 'public/'),
-        filename: 'bundle.js'
+        filename: '[name].[hash].js'
     },
     module: {
         loaders: [
@@ -30,7 +31,19 @@ module.exports = {
             }
         ]
     },
-    plugins: plugins,
+    plugins: [
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendor',
+            minChunks: Infinity,
+            filename: '[name].[hash].js'
+        }),
+
+        new HtmlWebpackPlugin({
+            template: path.join(__dirname, './public/index.html'),
+            filename: 'index.html',
+            inject: 'body'
+        })
+    ],
     // proxy
     devServer: {
         proxy: {

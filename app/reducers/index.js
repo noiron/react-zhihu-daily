@@ -31,6 +31,16 @@ const detail = (state = {}, action) => {
     }
 }
 
+const themes = (state = [], action) => {
+    switch (action.type) {
+        case 'GET_THEMES':
+            return action.payload.others;
+            
+        default:
+            return state;
+    }
+}
+
 const display = (state = {
     mainScrollTop: 0
 }, action) => {
@@ -44,4 +54,4 @@ const display = (state = {
     }
 }
 
-export { mainList, detail, display };
+export { mainList, detail, display, themes };

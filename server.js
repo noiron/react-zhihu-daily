@@ -18,11 +18,13 @@ app.use(function(req, res, next) {
 var getListAPI = require('./config/proxyApi').getListAPI;
 var getDetailAPI = require('./config/proxyApi').getDetailAPI;
 var getBeforeStoryAPI = require('./config/proxyApi').getBeforeStoryAPI;
+var getThemesAPI = require('./config/proxyApi').getThemesAPI;
 
 
 app.get('/api/topStory', getListAPI);
 app.get('/api/detail/*', getDetailAPI);
 app.get('/api/before/*', getBeforeStoryAPI);
+app.get('/api/themes', getThemesAPI);
 
 app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname, 'public', 'index.html'))
