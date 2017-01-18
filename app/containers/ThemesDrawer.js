@@ -4,21 +4,32 @@ import * as Actions from '../actions';
 
 const mapStateToProps = (state) => {
     return {
-        themes: state.themes
+        themes: state.themes,
+        themesShow: state.display.themesShow
     }
 }
 
 class ThemesDrawer extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+    }
+
+    static contextTypes = {
+        router: React.PropTypes.object.isRequired
     }
 
     componentDidMount() {
         this.props.dispatch(Actions.GET_THEMES_DATA());
     }
 
+    /* 点击某一个主题后，进入该主题的页面 */
+    handleClickTheme = (id) => {
+        this.context.router.push('/theme/' + id);
+        this.props.dispatch(Actions.TOGGLE_THEMES_DRAWER());
+    }
+
     render() {
-        const show = this.props.show;
+        const show = this.props.themesShow;
         const componentClasses = [];
 
         if (show) { componentClasses.push('show'); }
@@ -34,7 +45,12 @@ class ThemesDrawer extends Component {
                 }}>
                 <ul>
                 {
-                    this.props.themes.map(theme => <li key={theme.id}>{theme.name}</li>)
+                    this.props.themes.map(theme => 
+                    <li key={theme.id}
+                        onClick={() => this.handleClickTheme(theme.id)} 
+                        style={{whiteSpace: 'pre'}}>
+                        {theme.name}   {theme.id}
+                    </li>)
                 }
                 </ul>
             </div>

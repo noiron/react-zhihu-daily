@@ -98,3 +98,11 @@ export const SET_SCROLL_TOP = (data) => {
         payload: data
     }
 }
+
+
+// 切换左侧的主题列表的打开状态
+export const TOGGLE_THEMES_DRAWER = () => {
+    return {
+        type: 'TOGGLE_THEMES_DRAWER'
+    }
+}

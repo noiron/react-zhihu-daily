@@ -1,3 +1,7 @@
+/**
+ * 文章内容页的 Header
+ */
+
 import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
 
@@ -7,7 +11,7 @@ class Header extends Component {
     }
 
     backButton = () => {
-        history.back()
+        history.back();
     }
 
     render() {

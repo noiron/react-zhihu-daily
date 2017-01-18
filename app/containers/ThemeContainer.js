@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import * as Actions from '../actions';
-import moment from 'moment';
 import MainHeader from '../components/MainHeader';
 import ThemesDrawer from './ThemesDrawer';
 
@@ -14,8 +13,10 @@ class StoryListContainer extends Component {
 
         this.state = {
             scrollTop: 0,
-            themesOpen: false,
+            id: this.props.params.id,
         }
+
+        console.log(this.state.id);
     }
 
     componentDidMount() {
@@ -51,7 +52,7 @@ class StoryListContainer extends Component {
         return (
             <div>
                 <MainHeader toggleThemes={this.toggleThemes} title={'首页'} />
-                <ThemesDrawer />
+                <ThemesDrawer show={this.state.themesOpen} />
                 <div id="story-list-container">
                     {
                         this.props.mainList.latest.map((item, index) => {
@@ -60,6 +61,7 @@ class StoryListContainer extends Component {
                                     <span className="story-title">{item.title}</span>
                                     <img src={'https://images.weserv.nl/?url=' + item.images[0].substring(7)}
                                         />
+
                                 </div>
                             )
                         })

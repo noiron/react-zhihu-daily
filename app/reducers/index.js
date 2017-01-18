@@ -42,12 +42,17 @@ const themes = (state = [], action) => {
 }
 
 const display = (state = {
-    mainScrollTop: 0
+    mainScrollTop: 0,
+    themesShow: false
 }, action) => {
     switch (action.type) {
         case 'SET_SCROLL_TOP':
             return Object.assign({}, state, {
                 mainScrollTop: action.payload
+            });
+        case 'TOGGLE_THEMES_DRAWER':
+            return Object.assign({}, state, {
+                themesShow: !state.themesShow
             });
         default:
             return state;
