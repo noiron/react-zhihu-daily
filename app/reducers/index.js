@@ -1,3 +1,6 @@
+/**
+ * 首页显示的内容
+ */
 const mainList = (state = {
     latest: [],
     before: []
@@ -19,6 +22,9 @@ const mainList = (state = {
     }
 }
 
+/**
+ * 文章的具体内容
+ */
 const detail = (state = {}, action) => {
     switch (action.type) {
         case 'GET_DETAIL':
@@ -31,16 +37,22 @@ const detail = (state = {}, action) => {
     }
 }
 
+/**
+ * 主题列表
+ */
 const themes = (state = [], action) => {
     switch (action.type) {
         case 'GET_THEMES':
             return action.payload.others;
-            
+
         default:
             return state;
     }
 }
 
+/**
+ * 用于显示的相关设置
+ */
 const display = (state = {
     mainScrollTop: 0,
     themesShow: false
@@ -59,4 +71,18 @@ const display = (state = {
     }
 }
 
-export { mainList, detail, display, themes };
+/**
+ * 主题日报
+ */
+const themeContent = (state = {}, action) => {
+    switch (action.type) {
+        case 'GET_THEME_CONTENT':
+            console.log(action.payload);
+            return Object.assign({}, state, 
+                action.payload);
+        default:
+            return state;
+    }
+}
+
+export { mainList, detail, display, themes, themeContent };

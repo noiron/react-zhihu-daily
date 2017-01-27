@@ -62,9 +62,25 @@ const getThemesAPI = (req, res) => {
     });
 }
 
+/**
+ * 根据日报的主题id，获取该主题下的文章列表
+ */
+function getThemeContent(id) {
+    return axios.get(`http://news-at.zhihu.com/api/4/theme/${id}`).then(function (res) {
+        return res;
+    }).catch((err) => { console.log(err); })
+}
+
+const getThemeContentAPI = (req, res) => {
+    getThemeContent(req.query.id).then(data => {
+        res.send(data.data);
+    });
+}
+
 module.exports = {
     getListAPI,
     getDetailAPI,
     getBeforeStoryAPI,
     getThemesAPI,
+    getThemeContentAPI,
 }

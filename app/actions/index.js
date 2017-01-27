@@ -2,7 +2,8 @@ import {
     getLatestStoryApi,
     getDetailApi,
     getBeforeStoryApi,
-    getThemesApi
+    getThemesApi,
+    getThemeContentApi,
 } from '../helpers/api';
 
 /**
@@ -89,6 +90,27 @@ export const getThemes = (res) => {
     }
 }
 /*---------------------------------------------*/
+
+/**
+ * 获取一个主题下的文章列表
+ */
+export const getThemeContentData = (id) => {
+    return (dispatch => {
+        getThemeContentApi(id).then(res => {
+            dispatch(getThemeContent(res, id));
+        });
+    });
+}
+
+export const getThemeContent = (res, id) => {
+    return {
+        type: 'GET_THEME_CONTENT',
+        payload: {
+            data: res.data,
+            id: id
+        }
+    }
+}
 
 
 // 记录主页当前的垂直位置

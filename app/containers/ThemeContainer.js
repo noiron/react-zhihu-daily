@@ -16,33 +16,20 @@ class StoryListContainer extends Component {
             scrollTop: 0,
             id: this.props.params.id,
         }
-
-        console.log(this.state.id);
     }
 
     componentDidMount() {
-        if (this.props.mainList.latest.length === 0) {
-            this.props.dispatch(Actions.getLatestData());          
-        }
-        window.addEventListener('scroll', this.handleScroll);
-        document.body.scrollTop = this.props.display.mainScrollTop;
+        this.props.dispatch(Actions.getThemeContentData(this.props.params.id));
     }
 
-    componentWillUnmount() {
-        window.removeEventListener('scroll', this.handleScroll);
-        this.props.dispatch(Actions.SET_SCROLL_TOP(document.body.scrollTop));
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.params.id !== this.props.params.id) {
+            this.props.dispatch(Actions.getThemeContentData(nextProps.params.id));
+        }
     }
 
     handleClick = (id) => {
         this.context.router.push('/detail/' + id);
-    }
-
-    handleScroll = (e) => {
-        if (window.innerHeight + document.body.scrollTop + 1 >= document.body.scrollHeight) {
-            this.props.dispatch(Actions.GET_BEFORE_DATA(currentDate.format('YYYYMMDD')));
-            currentDate = currentDate.subtract(1, 'days');
-            console.log(currentDate.format('YYYYMMDD'));
-        }
     }
 
     toggleThemes = () => {
@@ -50,45 +37,22 @@ class StoryListContainer extends Component {
     }
 
     render() {
+        const { themeContent } = this.props;
         return (
             <div>
-                <MainHeader toggleThemes={this.toggleThemes} title={'首页'} />
+                <MainHeader toggleThemes={this.toggleThemes} title={themeContent.data ? themeContent.data.name : ''} />
                 <ThemesDrawer show={this.state.themesOpen} />
-                <div id="story-list-container">
-                    {
-                        this.props.mainList.latest.map((item, index) => {
-                            return (
-                                <div key={item.id} className="story-list-item" onClick={() => this.handleClick(item.id)}>
-                                    <span className="story-title">{item.title}</span>
-                                    <img src={'https://images.weserv.nl/?url=' + item.images[0].substring(7)}
-                                        />
 
-                                </div>
-                            )
-                        })
-                    }
-                    {
-                        this.props.mainList.before.map((dayItem) => {
-                            return (
-                                <div key={dayItem.date}>
-                                    <p>{dayItem.date}</p>
-                                    {
-                                        dayItem.data.map((item, index) => {
-                                            return (
-                                                <div key={item.id} className="story-list-item" onClick={() => this.handleClick(item.id)}>
-                                                    <span className="story-title">{item.title}</span>
-                                                    <img src={'https://images.weserv.nl/?url=' + item.images[0].substring(7)}
-                                                        />
-
-                                                </div>
-                                            )
-                                        })
-                                    }
-                                </div>
-                            )
-                        })
-                    }
-                </div>
+                {
+                    themeContent.data &&
+                    <div id="theme-content-wrap">
+                        {
+                            themeContent.data.stories.map((item, index) => {
+                                return <div key={item.id} className="story-list-item" onClick={() => this.handleClick(item.id)}>{item.title}</div>
+                            })
+                        }
+                    </div>
+                }
             </div>
         )
     }
@@ -98,6 +62,7 @@ const mapStateToProps = (state) => {
     return {
         mainList: state.mainList,
         display: state.display,
+        themeContent: state.themeContent
     }
 }
 

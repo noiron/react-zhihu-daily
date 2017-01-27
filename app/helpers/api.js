@@ -33,3 +33,13 @@ export function getThemesApi() {
         return res;
     });
 }
+
+export function getThemeContentApi(id) {
+    return axios({
+        method: 'GET',
+        url: '/api/theme/',
+        params: { id: id }
+    }).then(function(res) {
+        return res;
+    })
+}
