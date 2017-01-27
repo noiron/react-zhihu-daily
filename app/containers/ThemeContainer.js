@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import * as Actions from '../actions';
+import moment from 'moment';
 import MainHeader from '../components/MainHeader';
 import ThemesDrawer from './ThemesDrawer';
 
@@ -21,7 +22,7 @@ class StoryListContainer extends Component {
 
     componentDidMount() {
         if (this.props.mainList.latest.length === 0) {
-            this.props.dispatch(Actions.GET_LATEST_DATA());          
+            this.props.dispatch(Actions.getLatestData());          
         }
         window.addEventListener('scroll', this.handleScroll);
         document.body.scrollTop = this.props.display.mainScrollTop;
@@ -45,7 +46,7 @@ class StoryListContainer extends Component {
     }
 
     toggleThemes = () => {
-        this.props.dispatch(Actions.TOGGLE_THEMES_DRAWER());
+        this.props.dispatch(Actions.toggleThemesDrawer());
     }
 
     render() {

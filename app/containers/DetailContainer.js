@@ -14,7 +14,7 @@ class DetailContainer extends Component {
     }
 
     componentDidMount() {
-        this.props.dispatch(Actions.GET_DETAIL_DATA(this.props.params.id));
+        this.props.dispatch(Actions.getDetailData(this.props.params.id));
         document.body.scrollTop = 0;
 
         // this.props.actions.GET_DETAIL_DATA(this.props.params.id)

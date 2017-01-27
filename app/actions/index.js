@@ -1,26 +1,26 @@
 import {
-    getLatestStory,
-    getDetail,
-    getBeforeStory,
-    getThemes
+    getLatestStoryApi,
+    getDetailApi,
+    getBeforeStoryApi,
+    getThemesApi
 } from '../helpers/api';
 
 /**
  * 获得最近的文章列表 
  */
-export const GET_LATEST_DATA = () => {
+export const getLatestData = () => {
     return (dispatch, getStore) => {
         if (getStore().mainList.length > 0) {
             return;
         }
 
-        getLatestStory().then(res => {
-            dispatch(GET_LATEST(res));
+        getLatestStoryApi().then(res => {
+            dispatch(getLatest(res));
         });
     };
 }
 
-export const GET_LATEST = (res) => {
+export const getLatest = (res) => {
     return {
         type: 'GET_LATEST',
         payload: res.data
@@ -31,15 +31,15 @@ export const GET_LATEST = (res) => {
 /**
  * 获得一个具体日期的文章列表
  */
-export const GET_BEFORE_DATA = (date) => {
+export const getBeforeData = (date) => {
     return (dispatch, getStore) => {
-        getBeforeStory(date).then(res => {
-            dispatch(GET_BEFORE(res, date));
+        getBeforeStoryApi(date).then(res => {
+            dispatch(getBefore(res, date));
         });
     };
 }
 
-export const GET_BEFORE = (res, date) => {
+export const getBefore = (res, date) => {
     return {
         type: 'GET_BEFORE',
         payload: {
@@ -54,15 +54,15 @@ export const GET_BEFORE = (res, date) => {
 /**
  * 获取一篇文章的具体内容
  */
-export const GET_DETAIL_DATA = (id) => {
+export const getDetailData = (id) => {
     return (dispatch => {
-        getDetail(id).then(res => {
-            dispatch(GET_DETAIL(res));
+        getDetailApi(id).then(res => {
+            dispatch(getDetail(res));
         });
     });
 }
 
-export const GET_DETAIL = (res) => {
+export const getDetail = (res) => {
     return {
         type: 'GET_DETAIL',
         payload: res.data
@@ -74,15 +74,15 @@ export const GET_DETAIL = (res) => {
 /**
  * 获取日报的主题列表 
  */
-export const GET_THEMES_DATA = () => {
+export const getThemesData = () => {
     return (dispatch => {
-        getThemes().then(res => {
-            dispatch(GET_THEMES(res));
+        getThemesApi().then(res => {
+            dispatch(getThemes(res));
         });
     });
 }
 
-export const GET_THEMES = (res) => {
+export const getThemes = (res) => {
     return {
         type: 'GET_THEMES',
         payload: res.data
@@ -92,7 +92,7 @@ export const GET_THEMES = (res) => {
 
 
 // 记录主页当前的垂直位置
-export const SET_SCROLL_TOP = (data) => {
+export const setScrollTop = (data) => {
     return {
         type: 'SET_SCROLL_TOP',
         payload: data
@@ -101,7 +101,7 @@ export const SET_SCROLL_TOP = (data) => {
 
 
 // 切换左侧的主题列表的打开状态
-export const TOGGLE_THEMES_DRAWER = () => {
+export const toggleThemesDrawer = () => {
     return {
         type: 'TOGGLE_THEMES_DRAWER'
     }

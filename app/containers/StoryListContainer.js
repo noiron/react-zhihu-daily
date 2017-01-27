@@ -20,7 +20,7 @@ class StoryListContainer extends Component {
 
     componentDidMount() {
         if (this.props.mainList.latest.length === 0) {
-            this.props.dispatch(Actions.GET_LATEST_DATA());          
+            this.props.dispatch(Actions.getLatestData());          
         }
         window.addEventListener('scroll', this.handleScroll);
         document.body.scrollTop = this.props.display.mainScrollTop;
@@ -28,7 +28,7 @@ class StoryListContainer extends Component {
 
     componentWillUnmount() {
         window.removeEventListener('scroll', this.handleScroll);
-        this.props.dispatch(Actions.SET_SCROLL_TOP(document.body.scrollTop));
+        this.props.dispatch(Actions.setScrollTop(document.body.scrollTop));
     }
 
     handleClick = (id) => {
@@ -37,14 +37,14 @@ class StoryListContainer extends Component {
 
     handleScroll = (e) => {
         if (window.innerHeight + document.body.scrollTop + 1 >= document.body.scrollHeight) {
-            this.props.dispatch(Actions.GET_BEFORE_DATA(currentDate.format('YYYYMMDD')));
+            this.props.dispatch(Actions.getBeforeData(currentDate.format('YYYYMMDD')));
             currentDate = currentDate.subtract(1, 'days');
             console.log(currentDate.format('YYYYMMDD'));
         }
     }
 
     toggleThemes = () => {
-        this.props.dispatch(Actions.TOGGLE_THEMES_DRAWER());
+        this.props.dispatch(Actions.toggleThemesDrawer());
     }
 
     render() {

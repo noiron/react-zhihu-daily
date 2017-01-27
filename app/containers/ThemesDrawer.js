@@ -19,13 +19,13 @@ class ThemesDrawer extends Component {
     }
 
     componentDidMount() {
-        this.props.dispatch(Actions.GET_THEMES_DATA());
+        this.props.dispatch(Actions.getThemesData());
     }
 
     /* 点击某一个主题后，进入该主题的页面 */
     handleClickTheme = (id) => {
         this.context.router.push('/theme/' + id);
-        this.props.dispatch(Actions.TOGGLE_THEMES_DRAWER());
+        this.props.dispatch(Actions.toggleThemesDrawer());
     }
 
     render() {

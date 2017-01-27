@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-export function getLatestStory() {
+export function getLatestStoryApi() {
     return axios.get('/api/topStory').then(function (res) {
         return res;
     });
 };
 
-export function getBeforeStory(date) {
+export function getBeforeStoryApi(date) {
     return axios({
         method: 'GET',
         url: '/api/before/',
@@ -16,7 +16,7 @@ export function getBeforeStory(date) {
     })
 }
 
-export function getDetail(id) {
+export function getDetailApi(id) {
     return axios({
         method: 'GET',
         url: '/api/detail/',
@@ -28,7 +28,7 @@ export function getDetail(id) {
     });
 };
 
-export function getThemes() {
+export function getThemesApi() {
     return axios.get('/api/themes').then(function (res) {
         return res;
     });
