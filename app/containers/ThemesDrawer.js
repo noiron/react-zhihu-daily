@@ -24,7 +24,11 @@ class ThemesDrawer extends Component {
 
     /* 点击某一个主题后，进入该主题的页面 */
     handleClickTheme = (id) => {
-        this.context.router.push('/theme/' + id);
+        if (id === 0) { // 点击的是首页
+            this.context.router.push('/');
+        } else {
+            this.context.router.push('/theme/' + id);
+        }
         this.props.dispatch(Actions.toggleThemesDrawer());
     }
 
@@ -44,12 +48,13 @@ class ThemesDrawer extends Component {
                     boxSizing: 'border-box',
                 }}>
                 <ul>
+                <li onClick={() => this.handleClickTheme(0)}>首页</li>
                 {
                     this.props.themes.map(theme => 
                     <li key={theme.id}
                         onClick={() => this.handleClickTheme(theme.id)} 
                         style={{whiteSpace: 'pre'}}>
-                        {theme.name}   {theme.id}
+                        {theme.name}
                     </li>)
                 }
                 </ul>
