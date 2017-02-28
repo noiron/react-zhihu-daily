@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "webpack": "webpack --watch --progress",
+    "open-server": "node server.js",
     "start": "webpack-dev-server --port 3002 --host 0.0.0.0 --inline --hot --content-base public/ --history-api-fallback",
-    "dev": "node server.js | npm start"
+    "dev": "npm-run-all --parallel open-server start"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +25,7 @@
     "html-webpack-plugin": "^2.26.0",
     "less": "^2.7.2",
     "less-loader": "^2.2.3",
+    "npm-run-all": "^4.0.2",
     "react-router": "^3.0.0",
     "redux-logger": "^2.7.4",
     "style-loader": "^0.13.1",
