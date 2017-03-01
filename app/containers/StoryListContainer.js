@@ -4,6 +4,7 @@ import * as Actions from '../actions';
 import moment from 'moment';
 import MainHeader from '../components/MainHeader';
 import ThemesDrawer from './ThemesDrawer';
+import { NavBar } from 'antd-mobile';
 
 let currentDate = moment().subtract(1, 'days');
 
@@ -50,7 +51,8 @@ class StoryListContainer extends Component {
     render() {
         return (
             <div>
-                <MainHeader toggleThemes={this.toggleThemes} title={'首页'} />
+                {/*<MainHeader toggleThemes={this.toggleThemes} title={'首页'} />*/}
+                <NavBar leftContent="主题" onLeftClick={this.toggleThemes}>首页</NavBar>
                 <ThemesDrawer />
                 <div id="story-list-container">
                     {
