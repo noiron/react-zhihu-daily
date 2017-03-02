@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     debug: true,
-    devtool: "cheap-eval-source-map",
+    devtool: "inline-source-map",
     entry: {
         app: path.join(__dirname, './app/index.js'),
         vendor: ['react', 'react-dom', 'react-router'],
