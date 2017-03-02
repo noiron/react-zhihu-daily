@@ -52,7 +52,7 @@ class StoryListContainer extends Component {
         return (
             <div>
                 {/*<MainHeader toggleThemes={this.toggleThemes} title={'首页'} />*/}
-                <NavBar leftContent="主题" onLeftClick={this.toggleThemes}>首页</NavBar>
+                <NavBar iconName="bars" leftContent="主题" onLeftClick={this.toggleThemes}>首页</NavBar>
                 <ThemesDrawer />
                 <div id="story-list-container">
                     {

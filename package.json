@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "webpack": "webpack --watch --progress",
-    "open-server": "node server.js",
+    "open-api-server": "node apiServer.js",
     "start": "webpack-dev-server --port 3002 --host 0.0.0.0 --inline --hot --content-base public/ --history-api-fallback",
-    "dev": "npm-run-all --parallel open-server start"
+    "dev": "npm-run-all --parallel open-api-server start"
   },
   "keywords": [],
   "author": "",
