@@ -7,7 +7,7 @@ import ThemeContainer from './../containers/ThemeContainer';
 
 
 const route = (
-    <Router history={browserHistory}>
+    <Router history={browserHistory} key={Math.random()}>
         <Route path="/" component={Main}>
             <IndexRoute component={StoryListContainer} />
             <Route path="detail/:id" component={DetailContainer} />

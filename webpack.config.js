@@ -6,7 +6,10 @@ module.exports = {
     debug: true,
     devtool: "inline-source-map",
     entry: {
-        app: path.join(__dirname, './app/index.js'),
+        app: [
+            'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
+            path.join(__dirname, './app/index.js')
+        ],
         vendor: ['react', 'react-dom', 'react-router'],
     },
     output: {
@@ -43,7 +46,9 @@ module.exports = {
             template: path.join(__dirname, './public/index.html'),
             filename: 'index.html',
             inject: 'body'
-        })
+        }),
+
+        new webpack.HotModuleReplacementPlugin(),
     ],
     // proxy
     devServer: {

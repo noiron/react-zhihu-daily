@@ -8,5 +8,5 @@
     
     npm run dev
 
-进入 localhost:3002 查看运行情况。
+进入 localhost:3000 查看运行情况。
 
