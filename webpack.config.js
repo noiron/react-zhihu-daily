@@ -32,6 +32,10 @@ module.exports = {
             {
                 test: /\.css$/,
                 loader: 'style!css'
+            },
+            {
+                test: /\.svg$/,
+                loader: 'babel!react-svg',
             }
         ]
     },
@@ -43,7 +47,7 @@ module.exports = {
         }),
 
         new HtmlWebpackPlugin({
-            template: path.join(__dirname, './public/index.html'),
+            template: path.join(__dirname, './app/index.html'),
             filename: 'index.html',
             inject: 'body'
         }),

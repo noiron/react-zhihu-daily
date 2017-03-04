@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import Detail from '../components/Detail';
-
 import { connect } from 'react-redux';
 import * as Actions from '../actions';
 import { bindActionCreators } from 'redux';
 import { convertDetailImageUrl } from '../helpers/utils';
-import Header from '../components/Header';
-
+import Header from '../components/Header/Header';
+import LeftIcon from './../../static/left.svg';
 
 class DetailContainer extends Component {
     constructor(props) {
@@ -30,7 +29,11 @@ class DetailContainer extends Component {
 
         return (
             <div className="detail-container">
-                <Header title={' '} goBack={true} />
+                <Header
+                    title={''}
+                    leftContent={<LeftIcon className="back-icon" />}
+                    handleLeftClick={null}
+                />
                 <div className="img-wrap">
                     <h1>{detail.title}</h1>
                     <span className="img-source">{detail.image_source}</span>

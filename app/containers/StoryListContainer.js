@@ -2,9 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import * as Actions from '../actions';
 import moment from 'moment';
-import MainHeader from '../components/MainHeader';
+import Header from '../components/Header/Header';
 import ThemesDrawer from './ThemesDrawer';
-// import { NavBar } from 'antd-mobile';
+import CategoryIcon from './../../static/category.svg';
 
 let currentDate = moment().subtract(1, 'days');
 
@@ -21,7 +21,7 @@ class StoryListContainer extends Component {
 
     componentDidMount() {
         if (this.props.mainList.latest.length === 0) {
-            this.props.dispatch(Actions.getLatestData());          
+            this.props.dispatch(Actions.getLatestData());
         }
         window.addEventListener('scroll', this.handleScroll);
         document.body.scrollTop = this.props.display.mainScrollTop;
@@ -51,8 +51,12 @@ class StoryListContainer extends Component {
     render() {
         return (
             <div>
-                <MainHeader toggleThemes={this.toggleThemes} title={'首页11'} />
-                {/*<NavBar iconName="bars" leftContent="主题" onLeftClick={this.toggleThemes}>首页</NavBar>*/}
+                <Header
+                    leftContent={<CategoryIcon width={'20px'} height={'20px'} />}
+                    handleLeftClick={this.toggleThemes}
+                    title={'首页'}
+                    type={'fixed'}
+                />
                 <ThemesDrawer />
                 <div id="story-list-container">
                     {
@@ -61,7 +65,7 @@ class StoryListContainer extends Component {
                                 <div key={item.id} className="story-list-item" onClick={() => this.handleClick(item.id)}>
                                     <span className="story-title">{item.title}</span>
                                     <img src={'https://images.weserv.nl/?url=' + item.images[0].substring(7)}
-                                        />
+                                    />
                                 </div>
                             )
                         })
@@ -77,7 +81,7 @@ class StoryListContainer extends Component {
                                                 <div key={item.id} className="story-list-item" onClick={() => this.handleClick(item.id)}>
                                                     <span className="story-title">{item.title}</span>
                                                     <img src={'https://images.weserv.nl/?url=' + item.images[0].substring(7)}
-                                                        />
+                                                    />
 
                                                 </div>
                                             )
