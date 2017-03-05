@@ -2,6 +2,5 @@ node_modules
 bundle.js*
 debug.log
 public/app.*.js
-public/index.html
 public/vendor.*.js
 .vscode
